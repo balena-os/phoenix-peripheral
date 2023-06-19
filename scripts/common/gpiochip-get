@@ -1,0 +1,18 @@
+#!/bin/sh
+
+gpiochip_i2c_get_base_id() {
+    local i2c="$1"
+    local address="$2"
+    local regex="^gpiochip[0-9]+:[[:space:]]GPIOs[[:space:]][0-9]+-[0-9]+,[[:space:]]parent:[[:space:]]i2c/${i2c}-00${address}"
+
+    # line="$(echo gpiochip2: GPIOs 488-503, parent: i2c/1-0022, 1-0022, can sleep: | grep -E ${regex})"
+    line="$(cat /sys/kernel/debug/gpio | grep -E ${regex})"
+
+    if [ -z "$line" ]; then
+        echo -1
+    else
+        echo "$line" | awk '{print $3}' | cut -d '-' -f1
+    fi
+}
+
+gpiochip_i2c_get_base_id 1 $1

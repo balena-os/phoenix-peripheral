@@ -1,0 +1,43 @@
+#!/bin/sh
+
+GPIO_CHIP=$1
+GPIO_OFFSET=$2
+
+GPIO_ON=0
+GPIO_OFF=1
+
+WAIT_GPIO() {
+    sleep 0.05
+}
+
+gpio_set() {
+    local GPIO_PIN_NAME=$(($1+$2))
+
+    if [ ! -d /sys/class/gpio/gpio$GPIO_PIN_NAME ];then
+        # setup GPIOs
+        echo "$GPIO_PIN_NAME" > /sys/class/gpio/export; WAIT_GPIO
+
+        # set GPIOs as output
+        echo "out" > /sys/class/gpio/gpio$GPIO_PIN_NAME/direction; WAIT_GPIO
+    fi
+   
+    echo "$3" > /sys/class/gpio/gpio$GPIO_PIN_NAME/value
+}
+
+gpio_control() {
+    case $1 in
+    on|ON)
+        gpio_set $GPIO_CHIP $GPIO_OFFSET $GPIO_ON
+        ;;
+    off|OFF)
+        gpio_set $GPIO_CHIP $GPIO_OFFSET $GPIO_OFF
+        ;;
+    0|1)  
+        gpio_set $GPIO_CHIP $GPIO_OFFSET $1
+        ;;
+    *)  echo "Invalid parameter"
+        ;;
+    esac
+}
+
+gpio_control $3

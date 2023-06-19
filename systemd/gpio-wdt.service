@@ -1,0 +1,15 @@
+[Unit]
+Description="Watchdog enable service"
+Requisite=watchdog.service
+After=watchdog.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/phoenix/peripheral/wdt/wdt-en.sh enable
+ExecReload=/usr/share/phoenix/peripheral/wdt/wdt-en.sh enable
+ExecStop=/usr/share/phoenix/peripheral/wdt/wdt-en.sh disable
+StandardOutput=journal
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
