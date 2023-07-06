@@ -5,8 +5,8 @@ COMMON_PATH=$TMP_PATH/common
 
 . $COMMON_PATH/phoenix_gpio.conf
 
-WDT_ENABLE=1
-WDT_DISABLE=0
+WDT_ENABLE=0
+WDT_DISABLE=1
 
 wdt_en(){
     case $1 in 
