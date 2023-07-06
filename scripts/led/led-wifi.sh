@@ -14,7 +14,6 @@ if [ "$CHIP_BASE" != "-1" ];then
 fi
 
 wifi_led_set(){
-    echo "$LED_WIFI_CHIP $LED_WIFI_PIN"
     case $1 in
     on|ON)
         $COMMON_PATH/gpio-control $GPIO_EXPANSION_CHIP2 $WIFI_LED_PIN $LED_ON
