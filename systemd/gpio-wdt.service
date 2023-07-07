@@ -1,7 +1,7 @@
 [Unit]
 Description="Watchdog enable service"
 Requisite=watchdog.service
-After=watchdog.target
+After=multi-user.target watchdog.service
 
 [Service]
 Type=oneshot

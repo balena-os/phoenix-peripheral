@@ -5,8 +5,8 @@ COMMON_PATH=$TMP_PATH/common
 
 . $COMMON_PATH/phoenix_gpio.conf
 
-RELAY_ON=0
-RELAY_OFF=1
+RELAY_ON=1
+RELAY_OFF=0
 
 CHIP_BASE=$($COMMON_PATH/gpiochip-get $GPIO_EXPANSION_ADDR1)
 if [ "$CHIP_BASE" != "-1" ];then

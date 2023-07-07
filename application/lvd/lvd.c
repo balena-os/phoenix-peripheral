@@ -67,10 +67,10 @@ int main(int argc, char *argv[])
         goto cleanup;
       }
 
-      err = gpiod_line_request_bulk_falling_edge_events(&lines, "falling edge example");
+      err = gpiod_line_request_bulk_rising_edge_events(&lines, "rising edge example");
       if(err)
       {
-        perror("gpiod_line_request_bulk_falling_edge_events");
+        perror("gpiod_line_request_bulk_rising_edge_events");
         goto cleanup;
       }
 
